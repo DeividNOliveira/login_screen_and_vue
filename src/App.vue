@@ -44,7 +44,7 @@ const loginForm = () => {
   } else {
     message.value = "Preencha todos os campos novamente...";
   }
-};
+}; //medo
 </script>
 
 <style>
