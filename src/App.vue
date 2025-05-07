@@ -1,17 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <title>Página estática</title>
+    <form @submit.prevent="loginForm">
+      <label for="name">Nome:</label>
+      <input
+        type="text"
+        id="name"
+        v-model="name"
+        placeholder="Digite seu nome"
+      />
+
+      <label for="password">Senha:</label>
+      <input
+        type="password"
+        id="password"
+        v-model="password"
+        placeholder="Digite sua senha"
+      />
+      <button type="submit">Enviar</button>
+
+      <div id="message">{{ message }}</div>
+    </form>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { ref } from "vue";
+import { useCounterStore } from "@/Stores/CounterStore.js";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+const store = useCounterStore();
+const name = ref("");
+const password = ref("");
+const message = ref("");
+
+const loginForm = () => {
+  console.log("name: ", name.value);
+  console.log("password", password.value);
+  console.log("state: ", store.username, store.password);
+
+  if (name.value && password.value) {
+    message.value = "Deu certo!";
+    store.setLoginData(name.value, password.value);
+  } else {
+    message.value = "Preencha todos os campos novamente...";
   }
-}
+};
 </script>
 
 <style>
