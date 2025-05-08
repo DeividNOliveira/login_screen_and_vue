@@ -6,6 +6,7 @@ export const useCounterStore = defineStore("counter", {
     return {
       count: 0,
       username: "",
+      list: [],
       password: "",
     };
   },
@@ -16,10 +17,20 @@ export const useCounterStore = defineStore("counter", {
       this.count++;
     },
 
+    addToList(name, pass) {
+      const userData = {
+        username: name,
+        password: pass,
+      };
+      this.list.push(userData);
+    },
+
     //setings
     setLoginData(name, pass) {
       this.username = name;
       this.password = pass;
+
+      this.addToList(name, pass);
     },
   },
 
@@ -31,6 +42,10 @@ export const useCounterStore = defineStore("counter", {
 
     isLoggedIn() {
       return this.username !== "" && this.password !== "";
+    },
+
+    getList() {
+      return this.list;
     },
   },
 });

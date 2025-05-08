@@ -21,26 +21,35 @@
 
       <div id="message">{{ message }}</div>
     </form>
+    <router-view />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useCounterStore } from "@/Stores/CounterStore.js";
+import { useRouter } from "vue-router";
 
 const store = useCounterStore();
+const router = useRouter();
 const name = ref("");
 const password = ref("");
 const message = ref("");
+
+const goToWelcome = () => {
+  router.push("/WelcomePage");
+};
 
 const loginForm = () => {
   console.log("name: ", name.value);
   console.log("password", password.value);
   console.log("state: ", store.username, store.password);
+  console.log("list users and passwords: ", store.list);
 
   if (name.value && password.value) {
     message.value = "Deu certo!";
     store.setLoginData(name.value, password.value);
+    goToWelcome();
   } else {
     message.value = "Preencha todos os campos novamente...";
   }
