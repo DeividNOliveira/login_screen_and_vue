@@ -1,12 +1,17 @@
 import { defineStore } from "pinia";
 
+interface User {
+  useremail: string;
+  password: string;
+}
+
 export const useCounterStore = defineStore("counter", {
   //State
   state() {
     return {
       count: 0,
-      username: "",
-      list: [],
+      useremail: "",
+      list: [] as User[],
       password: "",
     };
   },
@@ -17,34 +22,34 @@ export const useCounterStore = defineStore("counter", {
       this.count++;
     },
 
-    addToList(name, pass) {
-      const userData = {
-        username: name,
+    addToList(email: string, pass: string) {
+      const userData: User = {
+        useremail: email,
         password: pass,
       };
       this.list.push(userData);
     },
 
     //setings
-    setLoginData(name, pass) {
-      this.username = name;
+    setLoginData(email: string, pass: string) {
+      this.useremail = email;
       this.password = pass;
 
-      this.addToList(name, pass);
+      this.addToList(email, pass);
     },
   },
 
   //Getters
   getters: {
-    showcount() {
+    showcount(): number {
       return this.count;
     },
 
-    isLoggedIn() {
-      return this.username !== "" && this.password !== "";
+    isLoggedIn(): boolean {
+      return this.useremail !== "" && this.password !== "";
     },
 
-    getList() {
+    getList(): User[] {
       return this.list;
     },
   },

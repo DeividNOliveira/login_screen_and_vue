@@ -1,13 +1,13 @@
 <template>
   <div id="Screen_login">
-    <title>PÃ¡gina estÃ¡tica</title>
+    <title>página Estática</title>
     <form @submit.prevent="loginForm">
-      <label for="name">Nome:</label>
+      <label for="email">email:</label>
       <input
         type="text"
-        id="name"
-        v-model="name"
-        placeholder="Digite seu nome"
+        id="email"
+        v-model="email"
+        placeholder="Digite seu email"
       />
 
       <label for="password">Senha:</label>
@@ -26,12 +26,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { useCounterStore } from "@/Stores/CounterStore.js";
+import { useCounterStore } from "@/Stores/CounterStore.ts";
 import { useRouter } from "vue-router";
 
 const store = useCounterStore();
 const router = useRouter();
-const name = ref("");
+const email = ref("");
 const password = ref("");
 const message = ref("");
 
@@ -40,14 +40,14 @@ const goToWelcome = () => {
 };
 
 const loginForm = () => {
-  console.log("name: ", name.value);
+  console.log("email: ", email.value);
   console.log("password", password.value);
   console.log("state: ", store.username, store.password);
   console.log("list users and passwords: ", store.list);
 
-  if (name.value && password.value) {
+  if (email.value && password.value) {
     message.value = "Deu certo!";
-    store.setLoginData(name.value, password.value);
+    store.setLoginData(email.value, password.value);
     goToWelcome();
   } else {
     message.value = "Preencha todos os campos novamente...";
