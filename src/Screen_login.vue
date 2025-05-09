@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { useCounterStore } from "@/Stores/CounterStore.ts";
 import { useRouter } from "vue-router";
@@ -42,7 +42,7 @@ const goToWelcome = () => {
 const loginForm = () => {
   console.log("email: ", email.value);
   console.log("password", password.value);
-  console.log("state: ", store.username, store.password);
+  console.log("state: ", store.useremail, store.password);
   console.log("list users and passwords: ", store.list);
 
   if (email.value && password.value) {
