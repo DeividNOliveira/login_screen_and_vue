@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import App from "../App.vue";
 import WelcomePage from "../WelcomePage.vue";
+import Screen_login from "@/Screen_login.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: App,
+    name: "Screen_login",
+    component: Screen_login,
   },
 
   {
